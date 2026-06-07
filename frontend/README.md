@@ -1,16 +1,123 @@
-# React + Vite
+# AI Shopping Application
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+AI-powered e-commerce application built with React, FastAPI, SQLite, and Sentence Transformers.
 
-Currently, two official plugins are available:
+## Features
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+### Authentication
 
-## React Compiler
+* User signup and login
+* JWT-based authentication
+* Secure password hashing
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+### Product Catalog
 
-## Expanding the ESLint configuration
+* Browse products
+* Product detail retrieval
+* Purchase tracking
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+### AI Features
+
+* Semantic product search using embeddings
+* Personalized recommendations
+* Related product recommendations
+* User onboarding and preference tracking
+
+## Tech Stack
+
+### Frontend
+
+* React
+* Vite
+* JavaScript
+
+### Backend
+
+* FastAPI
+* SQLAlchemy
+* SQLite
+* JWT Authentication
+
+### AI / Machine Learning
+
+* Sentence Transformers
+* Embedding Similarity Search
+* Recommendation Engine
+
+## Architecture
+
+Frontend (React)
+↓
+FastAPI REST API
+↓
+SQLite Database
+↓
+Embedding Search & Recommendation Engine
+
+## Local Setup
+
+### Backend
+
+```bash
+cd backend
+pip install -r requirements.txt
+py -m uvicorn app.main:app --reload
+```
+
+Backend API:
+
+```text
+http://127.0.0.1:8000/docs
+```
+
+### Frontend
+
+```bash
+cd frontend
+npm install
+npm run dev
+```
+
+Frontend:
+
+```text
+http://localhost:5173
+```
+
+## Main Endpoints
+
+### Authentication
+
+```text
+POST /auth/signup
+POST /auth/login
+```
+
+### Products
+
+```text
+GET /products
+GET /products/{product_id}
+```
+
+### AI Features
+
+```text
+GET /search
+GET /recommendations
+GET /products/{product_id}/related
+```
+
+### User Activity
+
+```text
+POST /onboarding
+POST /purchase
+```
+
+## Project Highlights
+
+* Built a full-stack AI-powered shopping application from scratch.
+* Implemented semantic search over a catalog of 5,000 products.
+* Developed personalized recommendations using onboarding, search history, and purchase activity.
+* Integrated React frontend with FastAPI backend through authenticated REST APIs.
