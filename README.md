@@ -1,27 +1,21 @@
 # AI Shopping Application
 
-AI-powered e-commerce application built with React, FastAPI, SQLite, and Sentence Transformers.
+A full-stack AI-powered shopping application built with React, FastAPI, SQLite, and Sentence Transformers.
+
+This project demonstrates authentication, product browsing, semantic product search, user activity tracking, and personalized recommendations based on onboarding, search, view, and purchase behavior.
 
 ## Features
-
-### Authentication
 
 * User signup and login
 * JWT-based authentication
 * Secure password hashing
-
-### Product Catalog
-
-* Browse products
-* Product detail retrieval
-* Purchase tracking
-
-### AI Features
-
-* Semantic product search using embeddings
+* Product catalog with 5,000 products
+* Natural-language semantic search
 * Personalized recommendations
 * Related product recommendations
-* User onboarding and preference tracking
+* User onboarding
+* Search, view, and purchase activity tracking
+* React frontend connected to FastAPI backend
 
 ## Tech Stack
 
@@ -30,6 +24,7 @@ AI-powered e-commerce application built with React, FastAPI, SQLite, and Sentenc
 * React
 * Vite
 * JavaScript
+* CSS
 
 ### Backend
 
@@ -37,37 +32,89 @@ AI-powered e-commerce application built with React, FastAPI, SQLite, and Sentenc
 * SQLAlchemy
 * SQLite
 * JWT Authentication
+* bcrypt password hashing
 
 ### AI / Machine Learning
 
 * Sentence Transformers
-* Embedding Similarity Search
-* Recommendation Engine
+* Product description embeddings
+* Cosine similarity search
+* User-profile-based recommendations
 
-## Architecture
+## How Semantic Search Works
 
-Frontend (React)
-↓
-FastAPI REST API
-↓
-SQLite Database
-↓
-Embedding Search & Recommendation Engine
+Each product name and description is converted into an embedding vector using a Sentence Transformers model.
 
-## Local Setup
+When a user searches with natural language, the query is also converted into an embedding. The backend compares the query embedding against product embeddings using cosine similarity and returns the most relevant products.
+
+Example queries:
+
+* "things for cooking dinner at home"
+* "something useful for charging my phone"
+* "a gift for a kid who likes games"
+
+## How Recommendations Work
+
+The app records user activity, including:
+
+* Onboarding interests
+* Searches
+* Product views
+* Purchases
+
+The recommendation system builds a user profile from those signals and recommends products with similar embeddings that the user has not already interacted with.
+
+## Project Structure
+
+```text
+ai-shopping-app/
+├── backend/
+│   ├── app/
+│   │   ├── auth.py
+│   │   ├── database.py
+│   │   ├── main.py
+│   │   ├── models.py
+│   │   ├── recommendations.py
+│   │   ├── schemas.py
+│   │   └── search.py
+│   ├── scripts/
+│   │   └── load_catalog.py
+│   └── requirements.txt
+│
+├── frontend/
+│   ├── src/
+│   │   ├── App.jsx
+│   │   └── App.css
+│   └── package.json
+│
+├── data/
+│   ├── products_catalog.csv
+│   └── categories.csv
+│
+└── README.md
+```
+
+## Running Locally
 
 ### Backend
 
 ```bash
 cd backend
 pip install -r requirements.txt
-py -m uvicorn app.main:app --reload
+python -m uvicorn app.main:app --reload
 ```
 
-Backend API:
+Backend API docs:
 
 ```text
 http://127.0.0.1:8000/docs
+```
+
+### Load Product Catalog
+
+```bash
+cd backend
+python scripts/load_catalog.py
 ```
 
 ### Frontend
@@ -78,15 +125,15 @@ npm install
 npm run dev
 ```
 
-Frontend:
+Frontend URL:
 
 ```text
 http://localhost:5173
 ```
 
-## Main Endpoints
+## Main API Endpoints
 
-### Authentication
+### Auth
 
 ```text
 POST /auth/signup
@@ -98,26 +145,46 @@ POST /auth/login
 ```text
 GET /products
 GET /products/{product_id}
+GET /products/{product_id}/related
 ```
 
 ### AI Features
 
 ```text
-GET /search
+GET /search?q=...
 GET /recommendations
-GET /products/{product_id}/related
 ```
 
-### User Activity
+### Activity
 
 ```text
 POST /onboarding
 POST /purchase
 ```
 
-## Project Highlights
+## Screenshots
 
-* Built a full-stack AI-powered shopping application from scratch.
-* Implemented semantic search over a catalog of 5,000 products.
-* Developed personalized recommendations using onboarding, search history, and purchase activity.
-* Integrated React frontend with FastAPI backend through authenticated REST APIs.
+Screenshots will be added in the `screenshots/` folder.
+
+Recommended screenshots:
+
+* Signup and onboarding
+* Product browsing
+* Semantic search results
+* Personalized recommendations
+
+## Future Improvements
+
+* Add shopping cart
+* Add checkout flow
+* Add order history
+* Improve frontend styling
+* Add pagination and filters
+* Deploy frontend and backend
+* Add automated tests
+* Replace SQLite with PostgreSQL for production
+* Use a vector database for larger catalogs
+
+## Resume Summary
+
+Built an AI-powered e-commerce application using React, FastAPI, SQLite, and Sentence Transformers. Implemented JWT authentication, semantic product search over 5,000 products, user activity tracking, and personalized recommendations based on onboarding, search, view, and purchase behavior.
